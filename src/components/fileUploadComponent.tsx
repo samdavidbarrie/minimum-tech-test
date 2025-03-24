@@ -15,8 +15,6 @@ function FileUploadComponent() {
       style={{
         textAlign: "center",
         padding: "20px",
-        backgroundColor: "blue",
-        border: "2px dotted",
       }}
     >
       <input {...getInputProps()} />
@@ -26,7 +24,14 @@ function FileUploadComponent() {
         <>
           <CloudUploadIcon />
           <Typography variant="body1" color="text.primary">
-            Click to upload or drag and drop
+            <Typography
+              component="span"
+              color="primary"
+              style={{ fontWeight: "bold" }}
+            >
+              Click to upload
+            </Typography>{" "}
+            or drag and drop
           </Typography>
           <Typography variant="body2" color="text.primary">
             .csv, .doc, .docx, .eml, .gif, .jpg, .jpeg, .msg, .pdf, .png, .txt,

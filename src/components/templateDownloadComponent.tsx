@@ -26,7 +26,7 @@ const TemplateDownloadComponent: React.FC = () => {
   };
 
   return (
-    <Alert severity="info" icon={<SendIcon />}>
+    <Alert severity="info" icon={<SendIcon />} style={{ marginBottom: "16px" }}>
       <Typography variant="subtitle1" color="text.secondary">
         Submit Data
       </Typography>
@@ -35,7 +35,11 @@ const TemplateDownloadComponent: React.FC = () => {
         headers. You should then upload the filled-in Excel file to submit the
         data.
       </Typography>
-      <Button variant="contained" onClick={handleDownload}>
+      <Button
+        variant="contained"
+        onClick={handleDownload}
+        style={{ marginTop: "8px" }}
+      >
         Download Template
       </Button>
     </Alert>

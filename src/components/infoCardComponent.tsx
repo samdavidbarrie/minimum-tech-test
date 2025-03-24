@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, CardContent, Typography } from "@mui/material";
+import { Box, Card, CardContent, Typography } from "@mui/material";
 
 interface InfoCardProps {
   organisation: string;
@@ -17,7 +17,7 @@ const InfoCard: React.FC<InfoCardProps> = ({
   reportingYear,
 }) => {
   return (
-    <Card>
+    <Box>
       <CardContent>
         {[
           { label: "Organisation", value: organisation },
@@ -27,11 +27,18 @@ const InfoCard: React.FC<InfoCardProps> = ({
           { label: "Reporting Year", value: reportingYear },
         ].map((item, index) => (
           <Typography key={index} variant="body2" color="text.secondary">
-            {item.label}: {item.value}
+            {item.label}:{" "}
+            <Typography
+              component="span"
+              color="text.primary"
+              sx={{ fontWeight: "bold" }}
+            >
+              {item.value}
+            </Typography>
           </Typography>
         ))}
       </CardContent>
-    </Card>
+    </Box>
   );
 };
 

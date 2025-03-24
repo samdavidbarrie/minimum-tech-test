@@ -1,17 +1,17 @@
 import React, { useState } from "react";
-import Container from "@mui/material/Container";
 import Alert from "@mui/material/Alert";
 import FileUploadContainer from "./fileUploadContainer";
 
 import HeaderComponent from "../components/headerComponent";
-import TabComponent from "../components/tabComponent";
+import TabComponent from "./tabContainer";
 import InfoCard from "../components/infoCardComponent";
 import InfoAlert from "../components/infoAlertComponent";
+import Box from "@mui/material/Box";
 
 const ContextContainer: React.FC = () => {
   const [isError, setIsError] = useState(false);
   return (
-    <Container>
+    <Box component="section">
       <HeaderComponent />
 
       <InfoCard
@@ -27,7 +27,7 @@ const ContextContainer: React.FC = () => {
       {isError && <Alert severity="error">This is an error Alert.</Alert>}
       <TabComponent />
       <FileUploadContainer />
-    </Container>
+    </Box>
   );
 };
 

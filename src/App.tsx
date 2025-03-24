@@ -1,23 +1,20 @@
 import { useState } from "react";
 import { NotificationsProvider } from "@toolpad/core/useNotifications";
 import ContextContainer from "./containers/contextContainer";
-import {
-  AppBar,
-  Toolbar,
-  IconButton,
-  Typography,
-  Container,
-  Button,
-} from "@mui/material";
+import { AppBar, Toolbar, Typography, Button } from "@mui/material";
 import { PageContainer } from "@toolpad/core/PageContainer";
+import { TaskContext } from "./utils/taskProvider";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [files, setFiles] = useState<File[]>([]);
 
-  // this needs to have context
+  const value = {
+    files,
+    setFiles,
+  };
 
   return (
-    <>
+    <TaskContext.Provider value={value}>
       <NotificationsProvider>
         <PageContainer
           sx={{ height: "100vh", width: "100vw", background: "white" }}
@@ -33,7 +30,7 @@ function App() {
           <ContextContainer />
         </PageContainer>
       </NotificationsProvider>
-    </>
+    </TaskContext.Provider>
   );
 }
 
