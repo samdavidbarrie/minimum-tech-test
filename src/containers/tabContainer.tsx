@@ -3,6 +3,8 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import TemplateDownloadComponent from "../components/templateDownloadComponent";
+import { useTaskContext } from "../utils/taskProvider";
+import FileUploadComponent from "../components/fileUploadComponent";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -34,29 +36,44 @@ function a11yProps(index: number) {
 }
 
 function TabContainer() {
-  const [value, setValue] = React.useState(0);
+  const taskContext = useTaskContext();
+  const tabIndex = taskContext?.tabIndex ?? 0;
+  const setTabIndex = taskContext?.setTabIndex ?? (() => {});
 
   const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
+    setTabIndex(newValue);
   };
 
-  const tabs = [
-    { label: "Fuel usage", content: <TemplateDownloadComponent /> },
-    { label: "Electricity usage", content: <TemplateDownloadComponent /> },
-    // Add more tabs here as needed
+  const tabData = [
+    { label: "Fuel usage", downloadLabel: "download fuel usage template" },
+    {
+      label: "Electricity usage",
+      downloadLabel: "download electricity usage template",
+    },
+    // Add more tab data here as needed
   ];
+
+  const tabs = tabData.map((tab, index) => ({
+    label: tab.label,
+    content: (
+      <>
+        <TemplateDownloadComponent downloadLabel={tab.downloadLabel} />
+        <FileUploadComponent tabIndex={index} />
+      </>
+    ),
+  }));
 
   return (
     <Box sx={{ width: "100%" }}>
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-        <Tabs value={value} onChange={handleChange} aria-label="tabs">
+        <Tabs value={tabIndex} onChange={handleChange} aria-label="tabs">
           {tabs.map((tab, index) => (
             <Tab key={index} label={tab.label} {...a11yProps(index)} />
           ))}
         </Tabs>
       </Box>
       {tabs.map((tab, index) => (
-        <CustomTabPanel key={index} value={value} index={index}>
+        <CustomTabPanel key={index} value={tabIndex} index={index}>
           {tab.content}
         </CustomTabPanel>
       ))}

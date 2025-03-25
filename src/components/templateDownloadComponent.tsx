@@ -1,9 +1,16 @@
-import { Alert, Button, Container, Typography } from "@mui/material";
+import { Alert, Button, Typography } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import React from "react";
 
-const TemplateDownloadComponent: React.FC = () => {
+interface TemplateDownloadComponentProps {
+  downloadLabel: string;
+}
+
+const TemplateDownloadComponent: React.FC<TemplateDownloadComponentProps> = ({
+  downloadLabel,
+}) => {
   const handleDownload = () => {
+    // random data
     const data = [
       ["Name", "Age", "Email"],
       ["John Doe", "30", "john.doe@example.com"],
@@ -28,11 +35,11 @@ const TemplateDownloadComponent: React.FC = () => {
   return (
     <Alert severity="info" icon={<SendIcon />} style={{ marginBottom: "16px" }}>
       <Typography variant="subtitle1" color="text.secondary">
-        Submit Data
+        Submit data
       </Typography>
       <Typography variant="body2" color="text.secondary">
         Download the template and input data against the appropriate column
-        headers. You should then upload the filled-in Excel file to submit the
+        headers. You should then upload the filled-in csv file to submit the
         data.
       </Typography>
       <Button
@@ -40,7 +47,7 @@ const TemplateDownloadComponent: React.FC = () => {
         onClick={handleDownload}
         style={{ marginTop: "8px" }}
       >
-        Download Template
+        {downloadLabel}
       </Button>
     </Alert>
   );
