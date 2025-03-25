@@ -4,7 +4,6 @@ import TabComponent from "./tabContainer";
 import InfoCard from "../components/infoCardComponent";
 import InfoAlert from "../components/infoAlertComponent";
 import Box from "@mui/material/Box";
-import ErrorAlert from "../components/errorAlertComponent";
 
 const ContextContainer: React.FC = () => {
   return (
@@ -18,7 +17,6 @@ const ContextContainer: React.FC = () => {
       />
 
       <InfoAlert />
-      <ErrorAlert />
       <TabComponent />
     </Box>
   );

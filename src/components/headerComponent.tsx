@@ -1,9 +1,18 @@
-import { Toolbar, Typography, Button, AppBar } from "@mui/material";
+import {
+  Toolbar,
+  Typography,
+  Button,
+  AppBar,
+  Alert,
+  Snackbar,
+} from "@mui/material";
 import { useTaskContext } from "../utils/taskProvider";
+import { useState } from "react";
 
 function HeaderComponent() {
   const taskContext = useTaskContext();
   const tabFiles = taskContext ? taskContext.tabFiles : [];
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
   return (
     <AppBar position="static" sx={{ width: "100%" }}>
@@ -27,7 +36,7 @@ function HeaderComponent() {
             onClick={() => {
               if (taskContext) {
                 taskContext.setTabFiles([]);
-                console.log("Submitted successfully!");
+                setSuccessMessage("Task submitted successfully!");
               }
             }}
           >
@@ -35,6 +44,19 @@ function HeaderComponent() {
           </Button>
         </div>
       </Toolbar>
+      <Snackbar
+        open={!!successMessage}
+        autoHideDuration={3000}
+        onClose={() => setSuccessMessage(null)}
+      >
+        <Alert
+          onClose={() => setSuccessMessage(null)}
+          severity="success"
+          sx={{ width: "100%" }}
+        >
+          {successMessage}
+        </Alert>
+      </Snackbar>
     </AppBar>
   );
 }
